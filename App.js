@@ -1,5 +1,7 @@
 
-import { Button, ScrollView, StyleSheet, TextInput, FlatList } from 'react-native';
+import { Button, ScrollView, StyleSheet, TextInput, FlatList,  } from 'react-native';
+
+import {StatusBar} from 'expo-status-bar';
 
 import React, { useState } from 'react';
 import {Text, View} from 'react-native';
@@ -39,20 +41,23 @@ export default function App() {
 
 
   return (
-    <View style={style.container}>
-      <View style={style.btnView}>
-        <Button title='Add New Goal' onPress={()=>{setVisible(!visible)}}></Button>
-      </View>
-      <GoalInput goalInputHandler={goalInputHandler} visible={visible} addGoalHandler={addGoalHandler} text={text}/>
-      <View style={style.listContainer}>
-        <FlatList data={goals} renderItem={(itemData)=>{
-          const item = itemData.item;
-          return <GoalList item={item} deleteGaol={deleteGaol}/>
-          }}
-          keyExtractor={(item,index)=>(index)}
-        />
-      </View>
-   </View>
+    <>
+      <StatusBar style='inverted'/>
+      <View style={style.container}>
+        <View style={style.btnView}>
+          <Button title='Add New Goal' onPress={()=>{setVisible(!visible)}}></Button>
+        </View>
+        <GoalInput goalInputHandler={goalInputHandler} visible={visible} addGoalHandler={addGoalHandler} text={text}/>
+        <View style={style.listContainer}>
+          <FlatList data={goals} renderItem={(itemData)=>{
+            const item = itemData.item;
+            return <GoalList item={item} deleteGaol={deleteGaol}/>
+            }}
+            keyExtractor={(item,index)=>(index)}
+          />
+        </View>
+    </View>
+   </>
   );
 }
 
